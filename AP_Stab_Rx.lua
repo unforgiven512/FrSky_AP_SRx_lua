@@ -44,14 +44,16 @@ local parameters = {
 	{ "RUD Knife Offset", VALUE, 0x4B, 3, nil, -20, 20, "%", 0x80 },
 }
 
+
+
 -- Change display attribute to current field
 local function addField(step)
 	local field = fields[current]
 	local min, max
-	if field[2] == VALUE then
+	if (field[2] == VALUE) then
 		min = field[6]
 		max = field[7]
-	elseif field[2] == COMBO then
+	elseif (field[2] == COMBO) then
 		min = 1
 		max = #(field[6])
 	end
@@ -82,17 +84,20 @@ local function getNextNilField(offset)
 			return fields[offsetIndex], offsetIndex
 		end
 	end
+
 	return nil, nil
 end
 
 local function drawProgressBar()
 	local finishedCount = 0
+
 	for index, thisField in ipairs(fields) do
 		if thisField[5] ~= nil then
 			finishedCount = finishedCount + 1
 		end
 	end
-	if LCD_W == 480 then
+
+	if (LCD_W == 480) then
 		local width = (300 * finishedCount) / #fields
 		lcd.drawRectangle(106, 10, 300, 6)
 		lcd.drawFilledRectangle(108, 12, width, 2);

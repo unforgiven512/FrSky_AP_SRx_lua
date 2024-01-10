@@ -35,14 +35,29 @@ local calibrationStep = 0
 local pages = {}
 local fields = {}
 
-local calibrationPositions = { "up", "down", "left", "right", "forward", "back" }
+local calibrationPositions = { 
+	"up", 
+	"down", 
+	"left", 
+	"right", 
+	"forward", 
+	"back" 
+}
+
 -- only for x7
 local positionConfirmed = 0
 local orientationAutoSense = 0
 
 -- -- only for horus
 local calibBitmaps = {}
-local calibBitmapsFile = { "img/up.png", "img/down.png", "img/left.png", "img/right.png", "img/forward.png", "img/back.png" }
+local calibBitmapsFile = { 
+	"img/ap_srx_up.png", 
+	"img/ap_srx_down.png", 
+	"img/ap_srx_left.png", 
+	"img/ap_srx_right.png", 
+	"img/ap_srx_forward.png", 
+	"img/ap_srx_back.png" 
+}
 
 local calibrationFields = {
 	{ "X:", VALUE, 0x9E, 0, -100, 100, "%" },
@@ -139,7 +154,7 @@ local function runCalibrationPageForHorus(event)
 		lcd.drawText(160, 220, "Press [Enter] when ready", attr)
 	else
 		lcd.drawText(160, 50, "Calibration completed", 0)
-		lcd.drawBitmap(Bitmap.open("bmp/done.bmp"), 200, 100)
+		lcd.drawBitmap(Bitmap.open("bmp/ap_srx_done.bmp"), 200, 100)
 		lcd.drawText(160, 220, "Press [RTN] when ready", attr)
 	end
 
@@ -178,7 +193,14 @@ end
 
 
 -- taranis x9
-local calibrationPositionsBitmaps = { "bmp/up.bmp", "bmp/down.bmp", "bmp/left.bmp", "bmp/right.bmp", "bmp/forward.bmp", "bmp/back.bmp" }
+local calibrationPositionsBitmaps = { 
+	"bmp/ap_srx_up.bmp", 
+	"bmp/ap_srx_down.bmp", 
+	"bmp/ap_srx_left.bmp", 
+	"bmp/ap_srx_right.bmp", 
+	"bmp/ap_srx_forward.bmp", 
+	"bmp/ap_srx_back.bmp" 
+}
 
 local function runCalibrationPageForX9(event)
 	fields = calibrationFields
@@ -199,7 +221,7 @@ local function runCalibrationPageForX9(event)
 		lcd.drawText(0, 56, "Press [Enter] when ready", attr)
 	else
 		lcd.drawText(0, 9, "Calibration completed", 0)
-		lcd.drawPixmap(10, 19, "bmp/done.bmp")
+		lcd.drawPixmap(10, 19, "bmp/ap_srx_done.bmp")
 		lcd.drawText(0, 56, "Press [Exit] when ready", attr)
 	end
 
@@ -234,12 +256,12 @@ local function drawCalibrationOrientation(x, y, step)
 	local positionStatus = 0
 --	for index = 1, 3, 1 do
 --		local field = fields[index]
---		lcd.drawText(90, 12+10*index, field[1], 0)
---		if math.abs(field[4] - orientation[step][2+index+orientationAutoSense]) < 300 then
---			lcd.drawNumber(100, 12+10*index, field[4]/10, LEFT+PREC2)
+--		lcd.drawText(90, 12 + 10 * index, field[1], 0)
+--		if math.abs(field[4] - orientation[step][2 + index + orientationAutoSense]) < 300 then
+--			lcd.drawNumber(100, 12 + 10 * index, field[4] / 10, LEFT + PREC2)
 --			positionStatus = positionStatus + 1
 --		else
---			lcd.drawNumber(100, 12+10*index, field[4]/10, LEFT+PREC2+INVERS)
+--			lcd.drawNumber(100, 12 + 10 * index, field[4] / 10, LEFT + PREC2 + INVERS)
 --		end
 --	end
 	if step == 3 and positionStatus == 2 then -- orientation auto sensing
