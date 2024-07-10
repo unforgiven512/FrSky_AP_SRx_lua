@@ -1,3 +1,5 @@
+-- TNS|FrSky AP SRx Calibration|TNE
+
 ---- #########################################################################
 ---- #                                                                       #
 ---- # Copyright (C) OpenTX                                                  #
@@ -341,3 +343,4 @@ local function run(event)
 end
 
 return { init=init, run=run }
+

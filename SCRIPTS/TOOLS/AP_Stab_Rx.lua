@@ -1,3 +1,6 @@
+-- TNS|FrSky AP SRx Config|TNE
+
+
 local VALUE = 0
 local COMBO = 1
 
@@ -119,9 +122,9 @@ local function redrawFieldsPage()
 	lcd.clear()
 
 	if isHorus then
-		drawScreenTitle("SRX", page, #pages)
+		drawScreenTitle("AP SRx", page, #pages)
 	else
-		lcd.drawScreenTitle("SRX", page, #pages)
+		lcd.drawScreenTitle("AP SRx", page, #pages)
 	end
 
 	if getNextNilField() ~= nil then
@@ -162,20 +165,20 @@ end
 
 local telemetryPopTimeout = 0
 local function refreshNext()
-	if refreshState == 0 then
+	if (refreshState == 0) then
 		local thisField = getNextNilField()
-		if #modifications > 0 then
+		if (#modifications > 0) then
 			telemetryWrite(modifications[1][1], modifications[1][2])
 			modifications[1] = nil
-		elseif thisField ~= nil then
+		elseif (thisField ~= nil) then
 			if telemetryRead(thisField[3]) == true then
 				refreshState = 1
 				telemetryPopTimeout = getTime() + 80 -- normal delay is 500ms
 			end
 		end
-	elseif refreshState == 1 then
+	elseif (refreshState == 1) then
 		local physicalId, primId, dataId, value = sportTelemetryPop()
-		if primId == 0x32 and dataId == 0x0C30 then
+		if (primId == 0x32) and (dataId == 0x0C30) then
 			local fieldId = value % 256
 			local refreshCount = 0
 			-- Check all the fields
@@ -311,3 +314,4 @@ end
 
 
 return { init=init, run=run }
+
