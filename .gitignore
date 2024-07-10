@@ -1,0 +1,16 @@
+#
+# .gitignore
+#
+
+## BACKUP & TEMPORARY FILES ##
+
+*~
+*.bak
+*.tmp
+*.swp
+
+
+## LUA-RELATED FILES ##
+
+*.luac
+
